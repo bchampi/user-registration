@@ -1,0 +1,57 @@
+<section class="container-fluid mt-1">
+    <div>
+        <h1 class="mb-3">Lista de Usuarios</h1>
+        <button class="btn btn-primary">Nuevo usuario</button>
+    </div>
+    <div>
+        <table class="table table-striped mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Genero</th>
+                    <th>Estado</th>
+                    <th style="width: 10%;" class="text-center">⚙️</th>
+                </tr>
+            </thead>
+            <tbody class="mh-75">
+                @for (user of userList; track user.id) {
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>
+                            <div class="text-center">
+                                <fa-icon 
+                                    [icon]="faCheckCircle" 
+                                    [class.text-success]="user.status === 'active'" 
+                                    [class.text-danger]="user.status === 'inactive'"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center gap-2">
+                                <fa-icon [icon]="faPencil" class="text-warning" />
+                                <fa-icon [icon]="faTrash" class="text-danger" />
+                            </div>
+                        </td>
+                    </tr>
+                } @empty {
+                    <tr>
+                        @if (!loading) {
+                            <td [colSpan]="6" class="text-center">No hay usuarios registrados</td>
+                        } @else {
+                            <td [colSpan]="6" class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <app-loader />
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
