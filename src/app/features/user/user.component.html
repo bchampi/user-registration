@@ -37,7 +37,7 @@
                                 <button (click)="openModal(user)" class="border-0" style="background: none;">
                                     <fa-icon [icon]="faPencil" class="text-warning" />
                                 </button>
-                                <button class="border-0" style="background: none;">
+                                <button (click)="remove(user.id)" class="border-0" style="background: none;">
                                     <fa-icon [icon]="faTrash" class="text-danger" />
                                 </button>
                             </div>

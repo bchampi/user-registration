@@ -47,4 +47,14 @@ export default class UserComponent {
       return
     }
 	}
+
+  remove(userId: number) {
+    if (confirm('¿Estás seguro de eliminar este usuario?')) {
+      this.userService.delete(userId)
+        .subscribe({
+          next: () => console.log('ok'),
+          error: () => console.log('error')
+        })
+    }
+  }
 }
