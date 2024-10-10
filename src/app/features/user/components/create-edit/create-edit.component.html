@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-user">Crear Usuario</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <div class="mb-3">
+      <label for="userName" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="userName" formControlName="name" />
+    </div>
+    <div class="mb-3">
+      <label for="userEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" formControlName="email" />
+    </div>
+    <div class="mb-3">
+      <label for="userGender" class="form-label">Genero</label>
+      <select id="userGender" class="form-select" formControlName="gender">
+        <option value="" selected disabled>Seleccione una opción</option>
+        <option value="male">Masculino</option>
+        <option value="female">Femenino</option>
+      </select>
+    </div>
+    <div class="modal-footer pt-3 p-0 gap-2">
+      <button type="button" class="btn btn-light m-0" (click)="activeModal.dismiss('cancel click')">Cancelar</button>
+      <button type="submit" class="btn btn-success m-0" [disabled]="userForm.invalid || userForm.pending">Guardar</button>
+    </div>
+  </form>
+</div>
