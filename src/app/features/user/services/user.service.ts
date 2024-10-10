@@ -32,4 +32,9 @@ export class UserService {
     return this.http.post<User>(`${apiUrl}/v2/users`, user)
       .pipe(tap(() => this.responseChanged.next()))
   }
+
+  edit(userId: number, user: UserDto) {
+    return this.http.put<User>(`${apiUrl}/v2/users/${userId}`, user)
+      .pipe(tap(() => this.responseChanged.next()))
+  }
 }

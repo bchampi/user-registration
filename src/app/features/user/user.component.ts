@@ -5,7 +5,7 @@ import LoaderComponent from 'src/app/utils/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil, faTrash, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { NgClass } from '@angular/common';
-import { CreateComponent } from './components/create/create.component';
+import { CreateEditComponent } from './components/create-edit/create-edit.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap } from 'rxjs';
 import { User } from './models/user';
@@ -13,7 +13,7 @@ import { User } from './models/user';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [LoaderComponent, CreateComponent, FontAwesomeModule, NgClass],
+  imports: [LoaderComponent, FontAwesomeModule, NgClass],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -39,6 +39,12 @@ export default class UserComponent {
   }
 
   openModal(user: User | null = null) {
-    const modalRef = this.modalService.open(CreateComponent)
+    const modalRef = this.modalService.open(CreateEditComponent)
+    if (user) {
+      const { id, status, ...restOfData } = user
+      modalRef.componentInstance.userId = id
+      modalRef.componentInstance.formData = signal(restOfData)
+      return
+    }
 	}
 }
