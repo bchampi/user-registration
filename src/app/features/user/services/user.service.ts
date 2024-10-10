@@ -37,4 +37,9 @@ export class UserService {
     return this.http.put<User>(`${apiUrl}/v2/users/${userId}`, user)
       .pipe(tap(() => this.responseChanged.next()))
   }
+
+  delete(userId: number) {
+    return this.http.delete<User>(`${apiUrl}/v2/users/${userId}`)
+      .pipe(tap(() => this.responseChanged.next()))
+  }
 }
