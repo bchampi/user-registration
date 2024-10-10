@@ -3,17 +3,18 @@ import { toSignal                                                               
 import { UserService } from './services/user.service';
 import LoaderComponent from 'src/app/utils/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPencil, faTrash, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faTrash, faCheckCircle, faEye } from '@fortawesome/free-solid-svg-icons'
 import { NgClass } from '@angular/common';
 import { CreateEditComponent } from './components/create-edit/create-edit.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap } from 'rxjs';
 import { User } from './models/user';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [LoaderComponent, FontAwesomeModule, NgClass],
+  imports: [LoaderComponent, RouterLink, FontAwesomeModule, NgClass],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -24,6 +25,7 @@ export default class UserComponent {
   faPencil = faPencil
   faTrash = faTrash
   faCheckCircle = faCheckCircle
+  faEye = faEye
 
   loading = this.userService.loadingSignal
   responseChanged = this.userService.responseChanged
