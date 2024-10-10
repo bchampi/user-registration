@@ -1,4 +1,4 @@
-# Myapp
+# User registration - CRUD
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
 
@@ -10,18 +10,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+![image](https://github.com/user-attachments/assets/4bc46ac2-24de-4a3d-a00b-52096732a02f)
+![image](https://github.com/user-attachments/assets/70b8d98f-c7d3-4a56-9a91-30a94c2b162b)
+![image](https://github.com/user-attachments/assets/8e597009-4615-4bb7-a22d-318533a7ff1f)
