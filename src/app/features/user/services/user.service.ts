@@ -28,6 +28,19 @@ export class UserService {
       )
   }
 
+  getById(userId: number) {
+    this.loadingSignal.set(true)
+    return this.http.get<User>(`${apiUrl}/v2/users/${userId}`)
+      .pipe(
+        catchError((_err) => {
+          alert('User not found')
+          this.loadingSignal.set(false)
+          return of (null)
+        }),
+        tap((_users) => this.loadingSignal.set(false))
+      )
+  }
+
   create(user: UserDto) {
     return this.http.post<User>(`${apiUrl}/v2/users`, user)
       .pipe(tap(() => this.responseChanged.next()))

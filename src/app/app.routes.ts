@@ -9,5 +9,9 @@ export const routes: Routes = [
     {
         path: 'users',
         loadComponent: () => import('./features/user/user.component')
+    },
+    {
+        path: 'users/:id',
+        loadComponent: () => import('./features/user/components/detail/detail.component')
     }
 ];
