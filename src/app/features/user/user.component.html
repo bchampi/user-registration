@@ -33,11 +33,14 @@
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex justify-content-center gap-2">
+                            <div class="d-flex justify-content-center gap-1">
+                                <a [routerLink]="['/users', user.id]" class="border-0">
+                                    <fa-icon [icon]="faEye" class="text-primary" />
+                                </a>
                                 <button (click)="openModal(user)" class="border-0" style="background: none;">
                                     <fa-icon [icon]="faPencil" class="text-warning" />
                                 </button>
-                                <button class="border-0" style="background: none;">
+                                <button (click)="remove(user.id)" class="border-0" style="background: none;">
                                     <fa-icon [icon]="faTrash" class="text-danger" />
                                 </button>
                             </div>
