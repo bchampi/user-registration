@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { User } from '../models/user';
+import { User, UserDto } from '../models/user';
 import { environment } from '@env/environment';
-import { catchError, map, tap,  } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
 
 const { apiUrl } = environment
 
@@ -13,8 +13,9 @@ const { apiUrl } = environment
 export class UserService {
   private http = inject(HttpClient)
   loadingSignal = signal(false)
+  responseChanged = new BehaviorSubject<void>(undefined)
 
-  getUsers() {
+  get() {
     this.loadingSignal.set(true)
     return this.http.get<User[]>(`${apiUrl}/v2/users`)
       .pipe(
@@ -25,5 +26,10 @@ export class UserService {
         }),
         tap((_users) => this.loadingSignal.set(false))
       )
+  }
+
+  create(user: UserDto) {
+    return this.http.post<User>(`${apiUrl}/v2/users`, user)
+      .pipe(tap(() => this.responseChanged.next()))
   }
 }

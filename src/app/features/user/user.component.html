@@ -1,7 +1,7 @@
 <section class="container-fluid mt-1">
     <div>
         <h1 class="mb-3">Lista de Usuarios</h1>
-        <button class="btn btn-primary">Nuevo usuario</button>
+        <button class="btn btn-primary" (click)="openModal()">Nuevo usuario</button>
     </div>
     <div>
         <table class="table table-striped mt-3">
@@ -16,7 +16,8 @@
                 </tr>
             </thead>
             <tbody class="mh-75">
-                @for (user of userList; track user.id) {
+                @let userData = loading() ? [] : userList;
+                @for (user of userData; track user.id) {
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.name }}</td>
@@ -33,14 +34,18 @@
                         </td>
                         <td>
                             <div class="d-flex justify-content-center gap-2">
-                                <fa-icon [icon]="faPencil" class="text-warning" />
-                                <fa-icon [icon]="faTrash" class="text-danger" />
+                                <button (click)="openModal(user)" class="border-0" style="background: none;">
+                                    <fa-icon [icon]="faPencil" class="text-warning" />
+                                </button>
+                                <button class="border-0" style="background: none;">
+                                    <fa-icon [icon]="faTrash" class="text-danger" />
+                                </button>
                             </div>
                         </td>
                     </tr>
                 } @empty {
                     <tr>
-                        @if (!loading) {
+                        @if (!loading()) {
                             <td [colSpan]="6" class="text-center">No hay usuarios registrados</td>
                         } @else {
                             <td [colSpan]="6" class="text-center">

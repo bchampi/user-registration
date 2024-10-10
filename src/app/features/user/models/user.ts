@@ -15,3 +15,5 @@ export interface User {
     gender: Gender
     status: Status
 }
+
+export type UserDto = Omit<User, 'id' | 'status'>

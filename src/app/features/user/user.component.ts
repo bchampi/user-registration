@@ -1,28 +1,44 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { toSignal                                                                                                                      } from '@angular/core/rxjs-interop';
 import { UserService } from './services/user.service';
 import LoaderComponent from 'src/app/utils/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil, faTrash, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { NgClass } from '@angular/common';
+import { CreateComponent } from './components/create/create.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { switchMap } from 'rxjs';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [LoaderComponent, FontAwesomeModule, NgClass],
+  imports: [LoaderComponent, CreateComponent, FontAwesomeModule, NgClass],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export default class UserComponent {
-  userService = inject(UserService)
+  private modalService = inject(NgbModal)
+  private userService = inject(UserService)
+
   faPencil = faPencil
   faTrash = faTrash
   faCheckCircle = faCheckCircle
 
   loading = this.userService.loadingSignal
-  userListSignal = toSignal(this.userService.getUsers(), { initialValue: [] })
+  responseChanged = this.userService.responseChanged
+  userListSignal = toSignal(
+    this.responseChanged.pipe(
+      switchMap(() => this.userService.get())
+    )
+    , { initialValue: [] }
+  )
 
   get userList() {
     return this.userListSignal()
   }
+
+  openModal(user: User | null = null) {
+    const modalRef = this.modalService.open(CreateComponent)
+	}
 }
